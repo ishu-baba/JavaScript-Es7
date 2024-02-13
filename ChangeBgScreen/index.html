@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change BackGround Screen</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        transition: background-color 0.5s;
+        background-color: bisque;
+      }
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        transition: color 0.5s;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.952); /* Added text shadow */
+      }
+
+      p {
+        font-size: 24px;
+        margin-top: 10px;
+        opacity: 1;
+        transition: color 0.5s, opacity 0.5s;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.977); /* Added text shadow */
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: chocolate;
+        color: black;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10%;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: burlywood;
+      }
+      #emoji {
+        font-size: 40px;
+        margin-top: 10px;
+        transition: color 0.5s, transform 0.5s;
+        display: inline-block;
+      }
+      #randomWord {
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="pageTitle">Change BackGround Screen</h1>
+    <p id="randomWord">Welcome!</p>
+    <p id="emoji">😊</p>
+    <button id="changeColor">Change Color</button>
+
+    <script>
+      //array of colors
+      const color = [
+        "#3498db", // Blue
+        "#e74c3c", // Red
+        "#2ecc71", // Green
+        "#f39c12", // Yellow
+        "#9b59b6", // Purple
+        "#34495e", // Dark Gray
+        "#1abc9c", // Turquoise
+        // Orange
+      ];
+
+      const words = [
+        "Hello",
+        "Goodbye",
+        "Awesome",
+        "Coding",
+        "Fun",
+        "JavaScript",
+        "Exciting",
+        "Creative",
+      ];
+
+      const emojis = ["😊", "🚀", "🎉", "💡", "🌈", "🔥", "👾", "🌟"];
+
+      //function to generate random color
+      const getRandomColor = () => {
+        const randomIndex = Math.floor(Math.random() * color.length);
+        return color[randomIndex];
+      };
+      const getRandomWord = () => {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        return words[randomIndex];
+      };
+
+      const getRandomEmoji = () => {
+        const randomIndex = Math.floor(Math.random() * emojis.length);
+        return emojis[randomIndex];
+      };
+
+      const changeBackGround = () => {
+        const newColor = getRandomColor();
+        const newWord = getRandomWord();
+        const newEmoji = getRandomEmoji();
+        document.body.style.backgroundColor = newColor;
+
+        const randomWordElement = document.getElementById("randomWord");
+        randomWordElement.style.opacity = 0; // Start fade-out effect
+        setTimeout(() => {
+          randomWordElement.innerText = newWord;
+          randomWordElement.style.color = newColor;
+          randomWordElement.style.opacity = 1; // Start fade-in effect
+        }, 500); // Wait for fade-out effect to complete
+
+        document.getElementById("pageTitle").style.color = newColor;
+        document.getElementById("randomWord").innerText = newWord;
+        document.getElementById("randomWord").style.color = newColor;
+        document.getElementById("emoji").innerText = newEmoji;
+        document.getElementById("emoji").style.color = newColor;
+        document.getElementById("emoji").style.transform =
+          "rotate(" + Math.floor(Math.random() * 360) + "deg)";
+      };
+
+      const changeColor = document.getElementById("changeColor");
+      changeColor.addEventListener("click", changeBackGround);
+    </script>
+  </body>
+</html>
